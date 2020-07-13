@@ -5,16 +5,19 @@ import emoji from "remark-emoji";
 import styled from "@emotion/styled";
 import rehype from "remark-rehype";
 import react from "rehype-react";
+import firebase from "firebase/app";
+import "firebase/database";
+import { useParams } from "react-router-dom";
 
 const Layout = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr;
+  display: flex;
   height: 100vh;
 `;
 
 const TextArea = styled.textarea`
   border: none;
-  resize: none;
+  resize: horizontal;
+  width: 30vw;
   padding: 1em;
   background: #212121;
   color: #a0a0a0;
@@ -34,12 +37,31 @@ const Presentation = styled.div`
   }
 `;
 
+const app = firebase.initializeApp({
+  apiKey: "AIzaSyAP2VYvHMtWhqFXPFhk8WehiSe9sdTAq1k",
+  databaseURL: "https://scroll-232ac.firebaseio.com/",
+});
+
+const db = app.database();
+
 function Editor() {
   const [value, setValue] = useState("");
+  const { doc } = useParams();
+
+  useEffect(() => {
+    db.ref(doc).on("value", (value) => setValue(value.val()));
+  }, [doc]);
+
+  const handleChange = (event) => {
+    event.preventDefault();
+    const { value } = event.target;
+
+    db.ref(doc).set(value);
+  };
 
   return (
     <Layout>
-      <TextArea autoFocus onChange={(e) => setValue(e.target.value)} />
+      <TextArea autoFocus value={value} onChange={handleChange} />
       <Presentation>
         {
           remark()

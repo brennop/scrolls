@@ -5,7 +5,7 @@ import Editor from "./pages/Editor";
 function App() {
   return (
     <Router>
-      <Route path="/:document">
+      <Route path="/:doc">
         <Editor />
       </Route>
       <Route path="/" exact>
