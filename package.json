@@ -12,20 +12,9 @@
     "markdown-it": "^11.0.0",
     "markdown-it-emoji": "^1.4.0",
     "react": "^16.13.1",
-    "react-contenteditable": "^3.3.5",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
-    "rehype": "^11.0.0",
-    "rehype-react": "^6.0.0",
-    "remark": "^12.0.0",
-    "remark-emoji": "^2.1.0",
-    "remark-html": "^11.0.2",
-    "remark-react": "^7.0.1",
-    "remark-rehype": "^7.0.0",
-    "remark-sectionize": "^1.1.1",
-    "slate": "^0.58.4",
-    "slate-react": "^0.58.4"
+    "react-scripts": "3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -49,3 +38,4 @@
     ]
   }
 }
+
