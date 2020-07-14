@@ -1,13 +1,23 @@
 import React, { useEffect, useRef } from "react";
+import Markdown from "markdown-it";
+import emoji from "markdown-it-emoji";
 
-const Slide = ({ children }) => {
+const md = new Markdown();
+md.use(emoji);
+
+const Slide = ({ value }) => {
   const section = useRef();
 
   useEffect(() => {
     section.current.scrollIntoView({ behavior: "smooth" });
-  }, [section]);
+  }, [section, value]);
 
-  return <section ref={section}>{children}</section>;
+  return (
+    <section
+      ref={section}
+      dangerouslySetInnerHTML={{ __html: md.render(value) }}
+    ></section>
+  );
 };
 
 export default Slide;
