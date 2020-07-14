@@ -8,6 +8,7 @@ import react from "rehype-react";
 import firebase from "firebase/app";
 import "firebase/database";
 import { useParams } from "react-router-dom";
+import Presentation from "../components/Presentation";
 
 const Layout = styled.div`
   display: flex;
@@ -21,20 +22,6 @@ const TextArea = styled.textarea`
   padding: 1em;
   background: #212121;
   color: #a0a0a0;
-`;
-
-const Presentation = styled.div`
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  display: flex;
-
-  section {
-    padding: 1em;
-    font-size: 2em;
-    width: 100%;
-    flex: 1 0 auto;
-    scroll-snap-align: start;
-  }
 `;
 
 const app = firebase.initializeApp({
@@ -62,19 +49,17 @@ function Editor() {
   return (
     <Layout>
       <TextArea autoFocus value={value} onChange={handleChange} />
-      <Presentation>
-        {
-          remark()
-            .use(emoji)
-            .use(sectionize)
-            .use(rehype)
-            .use(react, {
-              createElement: React.createElement,
-              Fragment: React.Fragment,
-            })
-            .processSync(value).result
-        }
-      </Presentation>
+      {
+        remark()
+          .use(emoji)
+          .use(sectionize)
+          .use(rehype)
+          .use(react, {
+            createElement: React.createElement,
+            Fragment: Presentation,
+          })
+          .processSync(value).result
+      }
     </Layout>
   );
 }
