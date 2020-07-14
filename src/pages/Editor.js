@@ -54,7 +54,7 @@ function Editor() {
   });
 
   useEffect(() => {
-    db.ref(doc).on("value", (value) => setValue(value.val()));
+    db.ref(doc).on("value", (value) => setValue(value.val() || ""));
   }, [doc]);
 
   const handleChange = (event) => {
