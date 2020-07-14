@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
 import firebase from "firebase/app";
 import "firebase/database";
-import { useParams } from "react-router-dom";
+import { useParams, useRouteMatch } from "react-router-dom";
 import Slide from "../components/Slide";
+import useResizeObserver from "use-resize-observer";
 
 const Presentation = styled.div`
   overflow-x: scroll;
@@ -44,6 +45,13 @@ const db = app.database();
 function Editor() {
   const [value, setValue] = useState("");
   const { doc } = useParams();
+  const match = useRouteMatch({ path: "/:doc/present" });
+  const presentation = useRef();
+
+  useResizeObserver({
+    ref: presentation,
+    onResize: () => presentation.current.scrollBy(0, 0),
+  });
 
   useEffect(() => {
     db.ref(doc).on("value", (value) => setValue(value.val()));
@@ -58,8 +66,8 @@ function Editor() {
 
   return (
     <Layout>
-      <TextArea autoFocus value={value} onChange={handleChange} />
-      <Presentation>
+      {!match && <TextArea autoFocus value={value} onChange={handleChange} />}
+      <Presentation ref={presentation}>
         {value
           .split(/(?<=^|\n)#(?=[\n ])/)
           .slice(1)
