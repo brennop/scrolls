@@ -5,6 +5,7 @@ import "firebase/database";
 import { useParams, useRouteMatch } from "react-router-dom";
 import Slide from "../components/Slide";
 import useResizeObserver from "use-resize-observer";
+import CodeEditor from "../components/Editor";
 
 const Presentation = styled.div`
   overflow-x: scroll;
@@ -26,15 +27,6 @@ const Layout = styled.div`
   height: 100vh;
 `;
 
-const TextArea = styled.textarea`
-  border: none;
-  resize: horizontal;
-  width: 25vw;
-  padding: 1em;
-  background: #212121;
-  color: #a0a0a0;
-`;
-
 const app = firebase.initializeApp({
   apiKey: "AIzaSyAP2VYvHMtWhqFXPFhk8WehiSe9sdTAq1k",
   databaseURL: "https://scroll-232ac.firebaseio.com/",
@@ -42,7 +34,7 @@ const app = firebase.initializeApp({
 
 const db = app.database();
 
-function Editor() {
+function Slides() {
   const [value, setValue] = useState("");
   const { doc } = useParams();
   const match = useRouteMatch({ path: "/:doc/present" });
@@ -57,16 +49,13 @@ function Editor() {
     db.ref(doc).on("value", (value) => setValue(value.val() || ""));
   }, [doc]);
 
-  const handleChange = (event) => {
-    event.preventDefault();
-    const { value } = event.target;
-
+  const handleChange = (value) => {
     db.ref(doc).set(value);
   };
 
   return (
     <Layout>
-      {!match && <TextArea autoFocus value={value} onChange={handleChange} />}
+      <CodeEditor value={value} onChange={handleChange} show={!match} />
       <Presentation ref={presentation}>
         {value
           .split(/(?<=^|\n)#(?=[\n ])/)
@@ -79,5 +68,5 @@ function Editor() {
   );
 }
 
-export default Editor;
+export default Slides;
 
