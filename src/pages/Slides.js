@@ -60,8 +60,8 @@ function Slides() {
         {value
           .split(/(?<=^|\n)#(?=[\n ])/)
           .slice(1)
-          .map((pane, index) => (
-            <Slide value={"#" + pane} key={pane + index} />
+          .map((pane) => (
+            <Slide value={"#" + pane} key={pane} />
           ))}
       </Presentation>
     </Layout>
