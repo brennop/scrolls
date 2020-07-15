@@ -11,6 +11,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.emoji {
+  height: 1.2em;
+  transform: translate(0, 0.2em);
+}
+
 html {
   overflow: hidden;
 }

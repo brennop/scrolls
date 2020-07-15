@@ -18,6 +18,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-simple-code-editor": "^0.11.0",
+    "twemoji": "^13.0.0",
     "use-resize-observer": "^6.1.0"
   },
   "scripts": {
