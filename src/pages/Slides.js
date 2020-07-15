@@ -28,7 +28,7 @@ const Layout = styled.div`
 `;
 
 const app = firebase.initializeApp({
-  apiKey: "AIzaSyAP2VYvHMtWhqFXPFhk8WehiSe9sdTAq1k",
+  apiKey: process.env.FIREBASE_API_KEY,
   databaseURL: "https://scroll-232ac.firebaseio.com/",
 });
 
@@ -47,6 +47,7 @@ function Slides() {
 
   useEffect(() => {
     db.ref(doc).on("value", (value) => setValue(value.val() || ""));
+    document.title = `${doc} - Scrolls`;
   }, [doc]);
 
   const handleChange = (value) => {
