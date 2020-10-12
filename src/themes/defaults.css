@@ -1,0 +1,66 @@
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.style-none {
+  list-style: none;
+}
+
+.red {
+  color: var(--color-red);
+}
+
+.green {
+  color: var(--color-green);
+}
+
+.blue {
+  color: var(--color-blue);
+}
+
+.yellow {
+  color: var(--color-yellow);
+}
+
+.orange {
+  color: var(--color-orange);
+}
+
+.purple {
+  color: var(--color-purple);
+}
+
+.aqua {
+  color: var(--color-aqua);
+}
+
+.default blockquote {
+  color: #666666;
+  margin: 1em 0;
+  padding-left: 1em;
+  border-left: 0.5em #eee solid;
+}
+
+.default pre {
+  background: #eee;
+  padding: 1em;
+  border-radius: 0.5em;
+}
+
+.default {
+  --color-red: red;
+  --color-green: green;
+  --color-blue: blue;
+  --color-yellow: yellow;
+  --color-orange: orange;
+  --color-purple: purple;
+  --color-aqua: aqua;
+}

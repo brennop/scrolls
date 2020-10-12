@@ -14,10 +14,11 @@ const Container = styled.div`
   font-family: monospace;
   color: #aaa;
   background: #222;
+  height: 100%;
 `;
 
 const CodeEditor = ({ show, onChange, value }) => {
-  return show ? (
+  return (
     <Container>
       <Editor
         padding={16}
@@ -26,8 +27,7 @@ const CodeEditor = ({ show, onChange, value }) => {
         highlight={(code) => highlight(code, languages.markdown)}
       />
     </Container>
-  ) : null;
+  );
 };
 
 export default CodeEditor;
-

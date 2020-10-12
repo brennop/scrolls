@@ -1,0 +1,32 @@
+.tomorrow {
+  background: #1d1f21;
+  color: #c5c8c6;
+
+  --color-red: #cc6666;
+  --color-green: #b5bd68;
+  --color-orange: #de935f;
+  --color-yellow: #f0c674;
+  --color-aqua: #8abeb7;
+  --color-blue: #81a2be;
+  --color-purple: #b294bb;
+}
+
+.tomorrow blockquote {
+  color: #969896;
+  margin: 1em 0;
+  padding-left: 1em;
+  border-left: 0.5em #373b41 solid;
+}
+
+.tomorrow pre {
+  background: #282a2e;
+  padding: 1em;
+  border-radius: 0.5em;
+}
+
+.tomorrow :not(pre) > code {
+  background: #282a2e;
+  color: var(--color-red);
+  padding: 0.3em 0.5em;
+  border-radius: 0.5em;
+}
