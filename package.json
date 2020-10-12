@@ -9,6 +9,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "firebase": "^7.16.0",
+    "gray-matter": "^4.0.2",
     "markdown-it": "^11.0.0",
     "markdown-it-attrs": "^3.0.3",
     "markdown-it-emoji": "^1.4.0",

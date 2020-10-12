@@ -18,7 +18,7 @@ const Container = styled.div`
 `;
 
 const CodeEditor = ({ show, onChange, value }) => {
-  return (
+  return show ? (
     <Container>
       <Editor
         padding={16}
@@ -27,7 +27,7 @@ const CodeEditor = ({ show, onChange, value }) => {
         highlight={(code) => highlight(code, languages.markdown)}
       />
     </Container>
-  );
+  ) : null;
 };
 
 export default CodeEditor;
