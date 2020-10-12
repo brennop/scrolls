@@ -28,10 +28,6 @@ const Layout = styled.div`
   height: 100vh;
 `;
 
-const Sidebar = styled.div`
-  height: 100%;
-`;
-
 const getTheme = (text) => {
   try {
     return matter(text).data.theme;
