@@ -13,6 +13,7 @@ const Presentation = styled.div`
   scroll-snap-type: x mandatory;
   display: flex;
   flex: 1;
+  text-align: center;
 
   section {
     padding: 1em;
