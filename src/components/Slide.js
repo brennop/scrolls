@@ -3,6 +3,7 @@ import Markdown from "markdown-it";
 import emoji from "markdown-it-emoji";
 import attrs from "markdown-it-attrs";
 import twemoji from "twemoji";
+import styled from "@emotion/styled";
 
 const md = new Markdown();
 md.use(emoji);
@@ -12,6 +13,15 @@ md.renderer.rules.emoji = function (token, idx) {
   return twemoji.parse(token[idx].content);
 };
 
+const Wrapper = styled.section`
+  display: flex;
+  align-items: center;
+`;
+
+const InnerDiv = styled.div`
+  flex: 1;
+`;
+
 const Slide = ({ value }) => {
   const section = useRef();
 
@@ -20,12 +30,12 @@ const Slide = ({ value }) => {
   }, [section, value]);
 
   return (
-    <section
-      ref={section}
-      dangerouslySetInnerHTML={{ __html: md.render(value) }}
-    ></section>
+    <Wrapper ref={section}>
+      <InnerDiv
+        dangerouslySetInnerHTML={{ __html: md.render(value) }}
+      ></InnerDiv>
+    </Wrapper>
   );
 };
 
 export default Slide;
-
