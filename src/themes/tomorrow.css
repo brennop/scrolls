@@ -22,6 +22,10 @@
   background: #282a2e;
   padding: 1em;
   border-radius: 0.5em;
+  text-align: left;
+  width: min-content;
+  min-width: 50%;
+  margin: auto;
 }
 
 .tomorrow :not(pre) > code {
