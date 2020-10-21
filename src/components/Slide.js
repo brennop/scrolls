@@ -7,7 +7,24 @@ import emoji from "markdown-it-emoji";
 import attrs from "markdown-it-attrs";
 import mila from "markdown-it-link-attributes";
 
-const md = new Markdown({ linkify: true });
+import Prism from "prismjs/components/prism-core";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-bash";
+
+const md = new Markdown({
+  linkify: true,
+  highlight: (code, lang) => {
+    if (lang && Prism.languages[lang]) {
+      try {
+        return Prism.highlight(code, Prism.languages[lang]);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  },
+});
+
 md.use(emoji);
 md.use(attrs);
 md.use(mila, {
