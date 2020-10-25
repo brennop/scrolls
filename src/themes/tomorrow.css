@@ -1,5 +1,5 @@
 .tomorrow {
-  background: #1d1f21;
+  background: linear-gradient(to bottom, #542375 0%, #CC0101 20%, rgb(160, 27, 27) 20%, rgb(145, 63, 63) 100%);
   color: #c5c8c6;
 
   --color-red: #cc6666;

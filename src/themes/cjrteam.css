@@ -1,0 +1,42 @@
+.cjrteam {
+    background: linear-gradient(to bottom, #1efa31 0%, #03c24c 20%, rgb(26, 127, 167) 50%, rgb(27, 90, 228) 100%);
+    color: #c5c8c6;
+  
+    --color-red: #cc6666;
+    --color-green: #b5bd68;
+    --color-orange: #de935f;
+    --color-yellow: #f0c674;
+    --color-aqua: #8abeb7;
+    --color-blue: #81a2be;
+    --color-purple: #b294bb;
+  }
+  
+  .cjrteam blockquote {
+    color: #f6faf6;
+    margin: 1em 0;
+    padding-left: 1em;
+    border-left: 0.5em #373b41 solid;
+  }
+  
+  .cjrteam pre {
+    background: #f1f2f5;
+    padding: 1em;
+    border-radius: 0.5em;
+    text-align: left;
+    width: min-content;
+    min-width: 50%;
+    margin: auto;
+  }
+  
+  .cjrteam :not(pre) > code {
+    background: #282a2e;
+    color: var(--color-red);
+    padding: 0.3em 0.5em;
+    border-radius: 0.5em;
+  }
+  
+  .cjrteam a,
+  a:visited {
+    color: #f2f8f4;
+  }
+  
