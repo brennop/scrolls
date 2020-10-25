@@ -58,7 +58,6 @@ function Slides() {
 
   useEffect(() => {
     db.ref(doc).on("value", (snapshot) => {
-      console.log(snapshot);
       const value = snapshot.val();
 
       if (!value) return;
