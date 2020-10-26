@@ -1,0 +1,57 @@
+.pokemon {
+    background:linear-gradient(to bottom,red 0%, #fd4343 25%, #ffa3a3 50%, white 75%) ;
+    color: #0b2c69;
+  
+    --color-red: #cc6666;
+    --color-green: #b5bd68;
+    --color-orange: #de935f;
+    --color-yellow: #f2cd3a;
+    --color-aqua: #8abeb7;
+    --color-blue: #3860aa;
+    --color-purple: #b294bb;
+  }
+
+  .pokemon h1{
+    font-family: pokemon;
+    letter-spacing: 4px;
+    color: #f2cd3a;
+    -webkit-text-stroke: 4px #3860aa;
+  }
+
+  .pokemon h2{
+    font-family: pokemon;
+    letter-spacing: 4px;
+    color: #f2cd3a;
+    -webkit-text-stroke: 4px #3860aa;
+  }
+  
+  .pokemon blockquote {
+    font-style: italic;
+    margin: 1em 0;
+    padding-left: 1em;
+    border-left: 0.5em var(--color-blue) solid;
+  }
+  
+  .pokemon pre {
+    border: 5px solid var(--color-blue);
+    background: var(--color-yellow);
+    padding: 1em;
+    border-radius: 0.5em;
+    text-align: left;
+    width: min-content;
+    min-width: 50%;
+    margin: auto;
+  }
+  
+  .pokemon :not(pre) > code {
+    background: var(--color-yellow);
+    color: var(--color-red);
+    padding: 0.3em 0.5em;
+    border-radius: 0.5em;
+  }
+  
+  .pokemon a,
+  a:visited {
+    color: var(--color-blue);
+  }
+  
