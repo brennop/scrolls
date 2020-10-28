@@ -7,6 +7,7 @@ import "ace-builds/src-noconflict/theme-tomorrow_night";
 
 const Container = styled.div`
   border: none;
+  resize: horizontal;
   width: 25vw;
   overflow-y: auto;
   font-family: monospace;
