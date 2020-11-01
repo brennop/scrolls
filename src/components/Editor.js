@@ -1,10 +1,9 @@
 import React from "react";
-import Editor from "react-simple-code-editor";
 import styled from "@emotion/styled";
-import { highlight, languages } from "prismjs/components/prism-core";
-import "prismjs/themes/prism-tomorrow.css";
-import "prismjs/components/prism-markup";
-import "prismjs/components/prism-markdown";
+import AceEditor from "react-ace";
+
+import "ace-builds/src-noconflict/mode-markdown";
+import "ace-builds/src-noconflict/theme-tomorrow_night";
 
 const Container = styled.div`
   border: none;
@@ -13,18 +12,24 @@ const Container = styled.div`
   overflow-y: auto;
   font-family: monospace;
   color: #aaa;
-  background: #222;
+  background: #1d1f21;
   height: 100%;
+  padding: 1em;
 `;
 
 const CodeEditor = ({ show, onChange, value }) => {
   return show ? (
     <Container>
-      <Editor
-        padding={16}
+      <AceEditor
+        mode="markdown"
         value={value}
-        onValueChange={(code) => onChange(code)}
-        highlight={(code) => highlight(code, languages.markdown)}
+        onChange={onChange}
+        theme="tomorrow_night"
+        showGutter={false}
+        width="100%"
+        height="100%"
+        fontSize={16}
+        wrapEnabled
       />
     </Container>
   ) : null;

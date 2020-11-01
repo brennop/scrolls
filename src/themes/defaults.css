@@ -66,6 +66,18 @@
   color: var(--color-aqua);
 }
 
+.pink {
+  color: var(--color-pink);
+}
+
+.lightpink {
+  color: var(--color-lightpink);
+}
+
+.brown {
+  color: var(--color-brown);
+}
+
 .default blockquote {
   color: #666666;
   margin: 1em 0;
@@ -88,4 +100,7 @@
   --color-orange: orange;
   --color-purple: purple;
   --color-aqua: aqua;
+  --color-pink: pink;
+  --color-lightpink: lightpink;
+  --color-brown: brown;
 }
