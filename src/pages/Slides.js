@@ -60,7 +60,6 @@ function Slides() {
     db.ref(doc).on("value", (snapshot) => {
       const value = snapshot.val();
       if (!value) return;
-
       setValue(value);
       setTheme(getTheme(value));
     });
