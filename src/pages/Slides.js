@@ -31,10 +31,8 @@ const Layout = styled.div`
 
 const getTheme = (text) => {
   try {
-    console.log("Nelsons")
     return matter(text).data.theme;
   } catch {
-    console.log("Risos")
     return "default";
   }
 };
@@ -61,7 +59,6 @@ function Slides() {
   useEffect(() => {
     db.ref(doc).on("value", (snapshot) => {
       const value = snapshot.val();
-      console.log(value)
       if (!value) return;
 
       setValue(value);
