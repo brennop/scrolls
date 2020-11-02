@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@300&display=swap');
+
+.spooky {
+    background: #7d7d7d;
+    font-family: 'Grenze Gotisch', cursive;
+    color: white;
+    word-spacing: 0.8rem;
+    --color-gold: #f0ba14;
+    border-radius: 25% 25%;
+    max-width: 69%;
+    text-shadow: 0px 0px 6px black;
+    margin-left: 3vw;
+    border: solid 1px black;
+    box-shadow: 3px 1px 10px 3px black;
+    list-style-image: url("https://www.flaticon.com/svg/static/icons/svg/3538/3538081.svg") image(0.5em);
+
+    --color-red: red;
+    --color-green: green;
+    --color-blue: blue;
+    --color-yellow: yellow;
+    --color-orange: orange;
+    --color-purple: purple;
+    --color-aqua: aqua;  
+  }
+
+
+.spooky section div {
+    border: solid 1px rgb(102, 93, 93);
+    box-shadow: inset 0px 0px 3px 3px black;
+}
+
+.spooky section:nth-child(2){
+    border: solid dotted orange;
+}
+
+
+.spooky blockquote {
+    color: #282a2e;
+    margin: 1em 0;
+    padding-left: 1em;
+    border-left: 0.5em white solid;
+  }
+  
+  .spooky pre {
+    background: #282a2e;
+    padding: 1em;
+    border-radius: 0.5em;
+    text-align: left;
+    width: min-content;    
+    min-width: 50%;
+    margin: auto;
+    margin-bottom: 1em;
+  }
+  
+  .spooky :not(pre) > code {
+    background: #282a2e;
+    color: var(--color-red);
+    padding: 0.3em 0.5em;
+    border-radius: 0.5em;
+  }
+  
+  .spooky a,
+  a:visited {
+    color: #c5c8c6;
+  }
+  
+
+  .red {
+    color: var(--color-red);
+  }
+
+  .green {
+    color: var(--color-green);
+  }
+
+  .blue {
+    color: var(--color-blue);
+  }
+
+  .yellow {
+    color: var(--color-yellow);
+  }
+
+  .orange {
+    color: var(--color-orange);
+  }
+
+  .purple {
+    color: var(--color-purple);
+  }
+
+  .aqua {
+    color: var(--color-aqua);
+  }
+
+  .purple {
+    color: var(--color-purple);
+  }
