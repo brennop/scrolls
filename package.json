@@ -8,7 +8,9 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@uiw/react-codemirror": "^3.0.5",
     "ace-builds": "^1.4.12",
+    "codemirror": "^5.59.4",
     "firebase": "^7.16.0",
     "gray-matter": "^4.0.2",
     "markdown-it": "^11.0.0",
@@ -22,7 +24,10 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "twemoji": "^13.0.0",
-    "use-resize-observer": "^6.1.0"
+    "use-resize-observer": "^6.1.0",
+    "y-codemirror": "^2.1.0",
+    "y-webrtc": "^10.1.8",
+    "yjs": "^13.5.1"
   },
   "scripts": {
     "start": "react-scripts start",

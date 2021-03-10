@@ -57,24 +57,32 @@ function Slides() {
   });
 
   useEffect(() => {
-    db.ref(doc).on("value", (snapshot) => {
-      const value = snapshot.val();
+    db.ref(doc)
+      .once("value")
+      .then((snapshot) => {
+        const value = snapshot.val();
 
-      if (!value) return;
+        if (!value) return;
 
-      setValue(value);
-      setTheme(getTheme(value));
-    });
+        setValue(value);
+        setTheme(getTheme(value));
+      });
     document.title = `${doc} - Scrolls`;
   }, [doc]);
 
   const handleEdit = (data) => {
+    setValue(data);
     db.ref(doc).set(data);
   };
 
   return (
     <Layout>
-      <CodeEditor value={value} onChange={handleEdit} show={!match} />
+      <CodeEditor
+        value={value}
+        onChange={handleEdit}
+        show={!match}
+        roomName={doc}
+      />
       <Presentation ref={presentation} className={theme}>
         {value
           .split(/(?<=^|\n)#(?=[\n ])/)
