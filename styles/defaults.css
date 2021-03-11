@@ -78,21 +78,21 @@
   color: var(--color-brown);
 }
 
-.default blockquote {
+blockquote {
   color: #666666;
   margin: 1em 0;
   padding-left: 1em;
   border-left: 0.5em #eee solid;
 }
 
-.default pre {
+pre {
   background: #eee;
   padding: 1em;
   border-radius: 0.5em;
   text-align: left;
 }
 
-.default {
+* {
   --color-red: red;
   --color-green: green;
   --color-blue: blue;

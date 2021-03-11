@@ -36,8 +36,11 @@ const CodeEditor = ({ roomName, initialValue, commit, onChange }) => {
         lineNumbers: true,
       });
 
-      const decoded = Uint8Array.from(initialValue);
-      Y.applyUpdate(ydoc, decoded);
+      if (initialValue) {
+        const decoded = Uint8Array.from(initialValue);
+        Y.applyUpdate(ydoc, decoded);
+      }
+
       onChange(yText.toJSON());
 
       ydoc.on("update", () => {

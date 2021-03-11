@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import Slide from "../components/Slide";
@@ -6,6 +6,8 @@ import useResizeObserver from "use-resize-observer";
 import { db } from "../services/firebase";
 import dynamic from "next/dynamic";
 import { EditLayout, LoadingWrapper } from "../styles";
+import matter from "gray-matter";
+import ThemeLoader from "../components/ThemeLoader";
 
 const CodeEditor = dynamic(() => import("../components/Editor"), {
   ssr: false,
@@ -28,15 +30,29 @@ const Presentation = styled.div`
 `;
 
 function Slides() {
-  const [value, setValue] = useState(null);
-  const [content, setContent] = useState("");
   const router = useRouter();
-  const { doc } = router.query;
-  const presentation = useRef();
+  const doc = router.query.doc as string;
+  const presentation = useRef<HTMLDivElement>(null);
+
+  const [value, setValue] = useState(null);
+  const [markdown, setMarkdown] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const { content, data } = useMemo(() => {
+    try {
+      return matter(markdown);
+    } catch {
+      return { content: markdown, data: null };
+    }
+  }, [markdown]);
 
   useResizeObserver({
     ref: presentation,
-    onResize: () => presentation.current.scrollBy(0, 0),
+    onResize: () => {
+      if (presentation?.current !== null) {
+        presentation.current.scrollBy(0, 0);
+      }
+    },
   });
 
   useEffect(() => {
@@ -44,6 +60,7 @@ function Slides() {
       db.ref(doc)
         .once("value")
         .then((snapshot) => {
+          setLoading(false);
           const value = snapshot.val();
 
           if (value == null) return;
@@ -54,23 +71,23 @@ function Slides() {
     }
   }, [doc]);
 
-  const commit = (value) => db.ref(doc).set(value);
+  const commit = (value: any) => db.ref(doc).set(value);
 
-  return value != null ? (
+  useEffect(() => {}, [data]);
+
+  return loading === false ? (
     <EditLayout>
+      <ThemeLoader theme={data?.theme} />
       <CodeEditor
         initialValue={value}
         roomName={doc}
         commit={commit}
-        onChange={setContent}
+        onChange={setMarkdown}
       />
-      <Presentation ref={presentation}>
-        {content
-          .split(/(?<=^|\n)#(?=[\n ])/)
-          .slice(1)
-          .map((pane) => (
-            <Slide value={"#" + pane} key={pane} />
-          ))}
+      <Presentation ref={presentation} className={data?.theme}>
+        {content.split("---").map((pane) => (
+          <Slide value={pane} key={pane} />
+        ))}
       </Presentation>
     </EditLayout>
   ) : (
