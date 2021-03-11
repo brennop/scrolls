@@ -15,12 +15,10 @@
     "markdown-it-attrs": "^3.0.3",
     "markdown-it-emoji": "^1.4.0",
     "markdown-it-link-attributes": "^3.0.0",
+    "next": "^10.0.8",
     "prismjs": "^1.21.0",
-    "react": "^16.13.1",
-    "react-ace": "^9.2.0",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "twemoji": "^13.0.0",
     "use-resize-observer": "^6.1.0",
     "y-codemirror": "^2.1.0",
@@ -28,24 +26,8 @@
     "yjs": "^13.5.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build"
   }
 }
