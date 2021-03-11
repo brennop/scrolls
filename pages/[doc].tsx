@@ -5,6 +5,7 @@ import Slide from "../components/Slide";
 import useResizeObserver from "use-resize-observer";
 import { db } from "../services/firebase";
 import dynamic from "next/dynamic";
+import { EditLayout, LoadingWrapper } from "../styles";
 
 const CodeEditor = dynamic(() => import("../components/Editor"), {
   ssr: false,
@@ -24,11 +25,6 @@ const Presentation = styled.div`
     flex: 1 0 auto;
     scroll-snap-align: start;
   }
-`;
-
-const Layout = styled.div`
-  display: flex;
-  height: 100vh;
 `;
 
 function Slides() {
@@ -60,8 +56,8 @@ function Slides() {
 
   const commit = (value) => db.ref(doc).set(value);
 
-  return value !== null ? (
-    <Layout>
+  return value != null ? (
+    <EditLayout>
       <CodeEditor
         initialValue={value}
         roomName={doc}
@@ -76,9 +72,11 @@ function Slides() {
             <Slide value={"#" + pane} key={pane} />
           ))}
       </Presentation>
-    </Layout>
+    </EditLayout>
   ) : (
-    <p>loading...</p>
+    <LoadingWrapper>
+      <img src="tail-spin.svg" />
+    </LoadingWrapper>
   );
 }
 

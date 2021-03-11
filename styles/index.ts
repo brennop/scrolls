@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -27,4 +27,18 @@ export const GlobalStyle = createGlobalStyle`
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
       "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace;
   }
+`;
+
+export const EditLayout = styled.div`
+  display: flex;
+  height: 100vh;
+`;
+
+export const LoadingWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  bottom: 50%;
+  left: 50%;
+  fill: #222;
 `;
