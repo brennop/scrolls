@@ -1,26 +1,40 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import CodeMirror from "codemirror";
-import "codemirror/lib/codemirror.css";
 import * as Y from "yjs";
 import { CodemirrorBinding } from "y-codemirror";
 import { WebrtcProvider } from "y-webrtc";
+import useResizeObserver from "use-resize-observer";
+import "codemirror/lib/codemirror.css";
+import "codemirror/theme/seti.css";
+import "codemirror/mode/markdown/markdown";
 
 const Container = styled.div`
   border: none;
   resize: horizontal;
   width: 25vw;
   overflow-y: auto;
-  font-family: monospace;
   color: #aaa;
   background: #1d1f21;
   height: 100%;
   padding: 1em;
+
+  .CodeMirror * {
+    font-family: "Source Code Pro", monospace;
+  }
+
+  .CodeMirror {
+    height: 100%;
+    width: 100%
+  }
+}
 `;
 
 const CodeEditor = ({ roomName, initialValue, commit, onChange }) => {
+  const container = useRef(null);
   const textarea = useRef(null);
   const [binding, setBinding] = useState();
+  const [editor, setEditor] = useState();
 
   useEffect(() => {
     if (textarea.current && !binding) {
@@ -32,8 +46,9 @@ const CodeEditor = ({ roomName, initialValue, commit, onChange }) => {
       const yUndoManager = new Y.UndoManager(yText);
 
       const editor = CodeMirror.fromTextArea(textarea.current, {
+        theme: "seti",
         mode: "markdown",
-        lineNumbers: true,
+        lineWrapping: true,
       });
 
       if (initialValue) {
@@ -54,12 +69,23 @@ const CodeEditor = ({ roomName, initialValue, commit, onChange }) => {
       const binding = new CodemirrorBinding(yText, editor, provider.awareness, {
         yUndoManager,
       });
+
       setBinding(binding);
+      setEditor(editor);
     }
   }, [binding, commit, roomName, initialValue, onChange]);
 
+  useResizeObserver({
+    ref: container,
+    onResize: () => {
+      if (container?.current !== null) {
+        editor.setSize("100%", "100%");
+      }
+    },
+  });
+
   return (
-    <Container>
+    <Container ref={container}>
       <textarea ref={textarea} />
     </Container>
   );
