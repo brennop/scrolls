@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styled from "@emotion/styled";
-import { md } from "../utils/markdown";
+import { toHTML } from "../utils/markdown";
 
 const Wrapper = styled.section`
   display: flex;
@@ -20,9 +20,7 @@ const Slide = ({ value }) => {
 
   return (
     <Wrapper ref={section}>
-      <InnerDiv
-        dangerouslySetInnerHTML={{ __html: md.render(value) }}
-      ></InnerDiv>
+      <InnerDiv dangerouslySetInnerHTML={{ __html: toHTML(value) }}></InnerDiv>
     </Wrapper>
   );
 };

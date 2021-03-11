@@ -85,7 +85,7 @@ function Slides() {
         onChange={setMarkdown}
       />
       <Presentation ref={presentation} className={data?.theme}>
-        {content.split("---").map((pane) => (
+        {content.split(/(?<=^|\n)---(?=[\n ])/).map((pane) => (
           <Slide value={pane} key={pane} />
         ))}
       </Presentation>
