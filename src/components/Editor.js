@@ -18,7 +18,7 @@ const Container = styled.div`
   padding: 1em;
 `;
 
-const CodeEditor = ({ show, roomName, onChange, value }) => {
+const CodeEditor = ({ show, roomName, value, commit }) => {
   const textarea = useRef(null);
   const [binding, setBinding] = useState();
 
@@ -31,12 +31,16 @@ const CodeEditor = ({ show, roomName, onChange, value }) => {
       const yText = ydoc.getText("codemirror");
       const yUndoManager = new Y.UndoManager(yText);
 
-      yText.observe(() => onChange(yText.toJSON()));
-
       const editor = CodeMirror.fromTextArea(textarea.current, {
-        value: value,
         mode: "markdown",
         lineNumbers: true,
+      });
+
+      const decoded = Uint8Array.from(value);
+      Y.applyUpdate(ydoc, decoded);
+
+      ydoc.on("update", () => {
+        commit(Y.encodeStateAsUpdate(ydoc));
       });
 
       const binding = new CodemirrorBinding(yText, editor, provider.awareness, {
@@ -44,7 +48,7 @@ const CodeEditor = ({ show, roomName, onChange, value }) => {
       });
       setBinding(binding);
     }
-  }, [binding, onChange, roomName, value]);
+  }, [binding, commit, roomName, value]);
 
   return show ? (
     <Container>

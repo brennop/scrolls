@@ -45,7 +45,7 @@ const app = firebase.initializeApp({
 const db = app.database();
 
 function Slides() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(null);
   const [theme, setTheme] = useState("default");
   const { doc } = useParams();
   const match = useRouteMatch({ path: "/:doc/present" });
@@ -62,7 +62,7 @@ function Slides() {
       .then((snapshot) => {
         const value = snapshot.val();
 
-        if (!value) return;
+        if (value == null) return;
 
         setValue(value);
         setTheme(getTheme(value));
@@ -70,28 +70,22 @@ function Slides() {
     document.title = `${doc} - Scrolls`;
   }, [doc]);
 
-  const handleEdit = (data) => {
-    setValue(data);
-    db.ref(doc).set(data);
-  };
+  const commit = (value) => db.ref(doc).set(value);
 
-  return (
+  return value !== null ? (
     <Layout>
-      <CodeEditor
-        value={value}
-        onChange={handleEdit}
-        show={!match}
-        roomName={doc}
-      />
-      <Presentation ref={presentation} className={theme}>
-        {value
-          .split(/(?<=^|\n)#(?=[\n ])/)
-          .slice(1)
-          .map((pane) => (
-            <Slide value={"#" + pane} key={pane} />
-          ))}
-      </Presentation>
+      <CodeEditor value={value} show={!match} roomName={doc} commit={commit} />
+      {/* <Presentation ref={presentation} className={theme}> */}
+      {/*   {value */}
+      {/*     .split(/(?<=^|\n)#(?=[\n ])/) */}
+      {/*     .slice(1) */}
+      {/*     .map((pane) => ( */}
+      {/*       <Slide value={"#" + pane} key={pane} /> */}
+      {/*     ))} */}
+      {/* </Presentation> */}
     </Layout>
+  ) : (
+    <p>loading...</p>
   );
 }
 
