@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
-import firebase from "firebase/app";
-import "firebase/database";
-import { useParams, useRouteMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Slide from "../components/Slide";
 import useResizeObserver from "use-resize-observer";
 import CodeEditor from "../components/Editor";
-import matter from "gray-matter";
+import { db } from "../services/firebase";
 
 const Presentation = styled.div`
   overflow-x: scroll;
@@ -29,26 +27,10 @@ const Layout = styled.div`
   height: 100vh;
 `;
 
-const getTheme = (text) => {
-  try {
-    return matter(text).data.theme;
-  } catch {
-    return "default";
-  }
-};
-
-const app = firebase.initializeApp({
-  apiKey: process.env.FIREBASE_API_KEY,
-  databaseURL: "https://scroll-232ac.firebaseio.com/",
-});
-
-const db = app.database();
-
 function Slides() {
   const [value, setValue] = useState(null);
-  const [theme, setTheme] = useState("default");
+  const [content, setContent] = useState("");
   const { doc } = useParams();
-  const match = useRouteMatch({ path: "/:doc/present" });
   const presentation = useRef();
 
   useResizeObserver({
@@ -65,7 +47,6 @@ function Slides() {
         if (value == null) return;
 
         setValue(value);
-        setTheme(getTheme(value));
       });
     document.title = `${doc} - Scrolls`;
   }, [doc]);
@@ -74,15 +55,20 @@ function Slides() {
 
   return value !== null ? (
     <Layout>
-      <CodeEditor value={value} show={!match} roomName={doc} commit={commit} />
-      {/* <Presentation ref={presentation} className={theme}> */}
-      {/*   {value */}
-      {/*     .split(/(?<=^|\n)#(?=[\n ])/) */}
-      {/*     .slice(1) */}
-      {/*     .map((pane) => ( */}
-      {/*       <Slide value={"#" + pane} key={pane} /> */}
-      {/*     ))} */}
-      {/* </Presentation> */}
+      <CodeEditor
+        initialValue={value}
+        roomName={doc}
+        commit={commit}
+        onChange={setContent}
+      />
+      <Presentation ref={presentation}>
+        {content
+          .split(/(?<=^|\n)#(?=[\n ])/)
+          .slice(1)
+          .map((pane) => (
+            <Slide value={"#" + pane} key={pane} />
+          ))}
+      </Presentation>
     </Layout>
   ) : (
     <p>loading...</p>
