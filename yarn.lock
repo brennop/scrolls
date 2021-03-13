@@ -543,10 +543,10 @@
   resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.2.41.tgz#4e470c25a99fa0b1f629f1c5ef180a318d399fd0"
   integrity sha512-XcdMT5PSZHiuf7LJIhzKIe+RyYa25S3LHRRvLnZc6iFjwXkrSDJ8J/HWO6VT8d2ZTbawp3VcLEjRF/VN8glCrA==
 
-"@fontsource/source-code-pro@^4.2.2":
+"@fontsource/roboto-mono@^4.2.2":
   version "4.2.2"
-  resolved "https://registry.yarnpkg.com/@fontsource/source-code-pro/-/source-code-pro-4.2.2.tgz#57bc8fdae6d9547302314ad9ace6d8fcee2bdebd"
-  integrity sha512-DGqIj0yrW5wGyLGbLX+ZYQ/FaEwBu0X0dbmnFClmTT1HqE6lVgT4YzhcSFsd2mmopGZJn8yGlOQNEvZV0kf1VQ==
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto-mono/-/roboto-mono-4.2.2.tgz#deb736753e9680e94a11d6e162badf8636310942"
+  integrity sha512-qBEDhPHwN0m6VXSS1EGSAkmKT3gqfQZJyynSkSDQZNPRLeDVq7CTcmJWhjIqAFgVqJ4PNfMUIEl9+bqeBtlvhQ==
 
 "@grpc/grpc-js@^1.0.0":
   version "1.1.2"

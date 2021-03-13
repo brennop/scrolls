@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled from "@emotion/styled";
-import CodeMirror from "codemirror";
-import * as Y from "yjs";
-import { CodemirrorBinding } from "y-codemirror";
-import { WebrtcProvider } from "y-webrtc";
-import useResizeObserver from "use-resize-observer";
-import "codemirror/lib/codemirror.css";
-import "codemirror/theme/seti.css";
-import "codemirror/mode/markdown/markdown";
+import React, { useEffect, useRef, useState } from 'react';
+import styled from '@emotion/styled';
+import CodeMirror from 'codemirror';
+import * as Y from 'yjs';
+import { CodemirrorBinding } from 'y-codemirror';
+import { WebrtcProvider } from 'y-webrtc';
+import useResizeObserver from 'use-resize-observer';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/seti.css';
+import 'codemirror/mode/markdown/markdown';
 
 const Container = styled.div`
   border: none;
@@ -20,7 +20,7 @@ const Container = styled.div`
   padding: 1em;
 
   .CodeMirror * {
-    font-family: "Source Code Pro", monospace;
+    font-family: "Roboto Mono", monospace;
   }
 
   .CodeMirror {
@@ -31,23 +31,28 @@ const Container = styled.div`
 `;
 
 const CodeEditor = ({ roomName, initialValue, commit, onChange }) => {
-  const container = useRef(null);
   const textarea = useRef(null);
   const [binding, setBinding] = useState();
   const [editor, setEditor] = useState();
+
+  const { ref: container } = useResizeObserver({
+    onResize: () => {
+      editor.setSize('100%', '100%');
+    },
+  });
 
   useEffect(() => {
     if (textarea.current && !binding) {
       const ydoc = new Y.Doc();
       const provider = new WebrtcProvider(roomName, ydoc, {
-        signaling: ["ws://192.168.1.76:4444"],
+        signaling: ['ws://192.168.1.76:4444'],
       });
-      const yText = ydoc.getText("codemirror");
+      const yText = ydoc.getText('codemirror');
       const yUndoManager = new Y.UndoManager(yText);
 
       const editor = CodeMirror.fromTextArea(textarea.current, {
-        theme: "seti",
-        mode: "markdown",
+        theme: 'seti',
+        mode: 'markdown',
         lineWrapping: true,
       });
 
@@ -58,7 +63,7 @@ const CodeEditor = ({ roomName, initialValue, commit, onChange }) => {
 
       onChange(yText.toJSON());
 
-      ydoc.on("update", () => {
+      ydoc.on('update', () => {
         commit(Y.encodeStateAsUpdate(ydoc));
       });
 
@@ -74,15 +79,6 @@ const CodeEditor = ({ roomName, initialValue, commit, onChange }) => {
       setEditor(editor);
     }
   }, [binding, commit, roomName, initialValue, onChange]);
-
-  useResizeObserver({
-    ref: container,
-    onResize: () => {
-      if (container?.current !== null) {
-        editor.setSize("100%", "100%");
-      }
-    },
-  });
 
   return (
     <Container ref={container}>
