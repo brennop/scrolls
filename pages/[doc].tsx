@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import styled from "@emotion/styled";
-import { useRouter } from "next/router";
-import Slide from "../components/Slide";
-import useResizeObserver from "use-resize-observer";
-import { db } from "../services/firebase";
-import dynamic from "next/dynamic";
-import { EditLayout, LoadingWrapper } from "../styles";
-import matter from "gray-matter";
-import ThemeLoader from "../components/ThemeLoader";
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
+import Slide from '../components/Slide';
+import useResizeObserver from 'use-resize-observer';
+import { db } from '../services/firebase';
+import dynamic from 'next/dynamic';
+import { EditLayout, LoadingWrapper } from '../styles';
+import matter from 'gray-matter';
+import ThemeLoader from '../components/ThemeLoader';
+import { toHTML } from '../utils/markdown';
 
-const CodeEditor = dynamic(() => import("../components/Editor"), {
+const CodeEditor = dynamic(() => import('../components/Editor'), {
   ssr: false,
 });
 
@@ -32,10 +33,11 @@ const Presentation = styled.div`
 function Slides() {
   const router = useRouter();
   const doc = router.query.doc as string;
-  const presentation = useRef<HTMLDivElement>(null);
+  const container = useRef<HTMLDivElement>(null);
 
+  const [presentation, setPresentation] = useState(null);
   const [value, setValue] = useState(null);
-  const [markdown, setMarkdown] = useState("");
+  const [markdown, setMarkdown] = useState('');
   const [loading, setLoading] = useState(true);
 
   const { content, data } = useMemo(() => {
@@ -47,10 +49,10 @@ function Slides() {
   }, [markdown]);
 
   useResizeObserver({
-    ref: presentation,
+    ref: container,
     onResize: () => {
-      if (presentation?.current !== null) {
-        presentation.current.scrollBy(0, 0);
+      if (container?.current !== null) {
+        container.current.scrollBy(0, 0);
       }
     },
   });
@@ -58,7 +60,7 @@ function Slides() {
   useEffect(() => {
     if (doc) {
       db.ref(doc)
-        .once("value")
+        .once('value')
         .then((snapshot) => {
           setLoading(false);
           const value = snapshot.val();
@@ -73,26 +75,21 @@ function Slides() {
 
   const commit = (value: any) => db.ref(doc).set(value);
 
-  useEffect(() => {}, [data]);
+  useEffect(() => {
+    toHTML(content).then((file) => setPresentation(file.result));
+  }, [content]);
 
   return loading === false ? (
     <EditLayout>
       <ThemeLoader theme={data?.theme} />
-      <CodeEditor
-        initialValue={value}
-        roomName={doc}
-        commit={commit}
-        onChange={setMarkdown}
-      />
-      <Presentation ref={presentation} className={data?.theme}>
-        {content.split(/(?<=^|\n)---(?=[\n ])/).map((pane) => (
-          <Slide value={pane} key={pane} />
-        ))}
+      <CodeEditor initialValue={value} roomName={doc} commit={commit} onChange={setMarkdown} />
+      <Presentation ref={container} className={data?.theme}>
+        {presentation}
       </Presentation>
     </EditLayout>
   ) : (
     <LoadingWrapper>
-      <img src="tail-spin.svg" />
+      <img src="tail-spin.svg" alt="loading indicator" />
     </LoadingWrapper>
   );
 }

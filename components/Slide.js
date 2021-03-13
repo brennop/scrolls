@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
-import styled from "@emotion/styled";
-import { toHTML } from "../utils/markdown";
+import React, { useEffect, useRef, useState } from 'react';
+import styled from '@emotion/styled';
+import { toHTML } from '../utils/markdown';
 
 const Wrapper = styled.section`
   display: flex;
@@ -12,15 +12,20 @@ const InnerDiv = styled.div`
 `;
 
 const Slide = ({ value }) => {
+  const [text, setText] = useState('');
   const section = useRef();
 
   useEffect(() => {
-    section.current.scrollIntoView({ behavior: "smooth" });
+    section.current.scrollIntoView({ behavior: 'smooth' });
   }, [section, value]);
+
+  useEffect(() => {
+    toHTML(value).then((file) => setText(file.toString()));
+  }, [value]);
 
   return (
     <Wrapper ref={section}>
-      <InnerDiv dangerouslySetInnerHTML={{ __html: toHTML(value) }}></InnerDiv>
+      <InnerDiv dangerouslySetInnerHTML={{ __html: text }}></InnerDiv>
     </Wrapper>
   );
 };
