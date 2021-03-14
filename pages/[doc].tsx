@@ -6,7 +6,6 @@ import ThemeLoader from '../components/ThemeLoader';
 import Presentation from '../components/Presentation';
 import { useFrontmatter } from '../utils/frontmatter';
 import { EditLayout, LoadingWrapper } from '../styles';
-import Toolbar from 'components/Toolbar';
 import Publish from 'components/Publish';
 
 const CodeEditor = dynamic(() => import('../components/Editor'), {
@@ -45,10 +44,11 @@ function Slides(): React.ReactElement {
     <EditLayout>
       <ThemeLoader theme={data?.theme} />
       <CodeEditor initialValue={value} roomName={doc} commit={commit} onChange={setMarkdown} />
-      <Presentation theme={data?.theme} content={content} />
-      <Toolbar>
-        <Publish data={markdown} name={doc} />
-      </Toolbar>
+      <Presentation
+        theme={data?.theme}
+        content={content}
+        toolbar={<Publish data={markdown} name={doc} />}
+      />
     </EditLayout>
   ) : (
     <LoadingWrapper>

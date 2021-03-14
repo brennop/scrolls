@@ -13,6 +13,15 @@ export default function Toolbar({ children }) {
         '&:hover': {
           opacity: 1,
         },
+        button: {
+          margin: '4px',
+          fontSize: '16px',
+          background: 'none',
+          border: 'none',
+          textDecoration: 'underline',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+        },
       }}
     >
       {children}

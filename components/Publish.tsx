@@ -16,7 +16,10 @@ export default function Publish({ data, name }) {
 
   return (
     <>
-      <button onClick={handlePublish}>🚀 Publish</button>
+      <button onClick={handlePublish}>
+        <span className="emoji">🚀</span>
+        Publish
+      </button>
       {show && (
         <AriaModal
           onExit={() => setShow(false)}
@@ -42,7 +45,8 @@ export default function Publish({ data, name }) {
                 margin: '0',
               }}
             >
-              🚀 Published to
+              <span className="emoji">🚀 </span>
+              Published to
             </h1>
             <a
               href={fullPath}

@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -9,23 +9,20 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", "Noto Color Emoji",
-      "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+      "Apple Color Emoji", Segoe UI Emoji, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   .emoji {
+    font-family: apple color emoji,segoe ui emoji,noto color emoji,android emoji,
+    emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
     height: 1.2em;
     transform: translate(0, 0.2em);
   }
 
   html {
     overflow: hidden;
-  }
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace;
   }
 `;
 
