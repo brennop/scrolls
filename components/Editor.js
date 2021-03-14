@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import CodeMirror from 'codemirror';
 import * as Y from 'yjs';
 import { CodemirrorBinding } from 'y-codemirror';
