@@ -15,7 +15,7 @@ const Container = styled.div`
   width: 25vw;
   overflow-y: auto;
   color: #aaa;
-  background: #1d1f21;
+  background: #151718;
   height: 100%;
   padding: 1em;
 

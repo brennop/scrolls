@@ -78,6 +78,10 @@
   color: var(--color-brown);
 }
 
+.gray {
+  color: var(--color-gray);
+}
+
 blockquote {
   color: #666666;
   margin: 1em 0;
@@ -92,7 +96,7 @@ pre {
   text-align: left;
 }
 
-* {
+body {
   --color-red: red;
   --color-green: green;
   --color-blue: blue;
@@ -103,4 +107,5 @@ pre {
   --color-pink: pink;
   --color-lightpink: lightpink;
   --color-brown: brown;
+  --color-gray: gray;
 }
