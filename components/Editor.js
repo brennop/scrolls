@@ -57,8 +57,11 @@ const CodeEditor = ({ roomName, initialValue, commit, onChange }) => {
       });
 
       if (initialValue) {
-        const decoded = Uint8Array.from(initialValue);
-        Y.applyUpdate(ydoc, decoded);
+        try {
+          Y.applyUpdate(ydoc, initialValue);
+        } catch (e) {
+          console.error(e);
+        }
       }
 
       onChange(yText.toJSON());

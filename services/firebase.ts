@@ -1,5 +1,4 @@
 import firebase from 'firebase/app';
-import 'firebase/database';
 import 'firebase/firestore';
 import hash from 'object-hash';
 
@@ -15,8 +14,32 @@ if (firebase.apps.length === 0) {
   });
 }
 
-export const db = firebase.database();
 export const firestore = firebase.firestore();
+
+interface PersistedDocument {
+  data: firebase.firestore.Blob;
+}
+
+export const getDocument = async (documentPath: string): Promise<Uint8Array> => {
+  return firestore
+    .collection('documents')
+    .doc(documentPath)
+    .get()
+    .then((snapshot) => {
+      if (snapshot.exists) {
+        const document = snapshot.data() as PersistedDocument;
+        if (document.data?.toUint8Array) {
+          return document.data.toUint8Array();
+        }
+      }
+      return null;
+    });
+};
+
+export const setDocument = (documentPath: string, value: Uint8Array) => {
+  const data = firebase.firestore.Blob.fromUint8Array(value);
+  firestore.collection('documents').doc(documentPath).set({ data });
+};
 
 export const getPublished = (documentPath: string) =>
   firestore.collection('published').doc(documentPath).get();
