@@ -1,6 +1,5 @@
 import Head from 'next/head';
-
-const themes = ['tomorrow', 'chocolate', 'pokemon'];
+import themes from 'utils/themes.json';
 
 type ThemeLoaderProps = {
   theme?: string;

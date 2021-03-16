@@ -3,10 +3,11 @@ export default function Toolbar({ children }) {
     <div
       css={{
         position: 'absolute',
-        bottom: 0,
-        padding: '32px 16px',
+        bottom: '16px',
+        right: 0,
+        padding: '16px',
         opacity: 0,
-        width: '100%',
+        width: '50%',
         transition: '0.2s ease-out',
         display: 'flex',
         justifyContent: 'flex-end',
@@ -14,7 +15,7 @@ export default function Toolbar({ children }) {
           opacity: 1,
         },
         button: {
-          margin: '4px',
+          margin: '8px',
           fontSize: '16px',
           background: 'none',
           border: 'none',

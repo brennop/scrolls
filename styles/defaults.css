@@ -96,6 +96,11 @@ pre {
   text-align: left;
 }
 
+.default {
+  background: #fff;
+  color: #212121;
+}
+
 body {
   --color-red: red;
   --color-green: green;

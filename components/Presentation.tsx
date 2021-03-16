@@ -1,37 +1,21 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react';
 import useResizeObserver from 'use-resize-observer';
+import { Config } from 'utils/frontmatter';
 import { toHTML } from '../utils/markdown';
 import Toolbar from './Toolbar';
 
-const Container = styled.div`
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  display: flex;
-  flex: 1;
-
-  section {
-    padding: 1em;
-    font-size: 2em;
-    width: 100%;
-    flex: 1 0 auto;
-    scroll-snap-align: start;
-  }
-`;
-
 type PresentationProps = {
   content: string;
-  theme: string;
-  toolbar: React.ReactNode;
+  config: Config;
+  toolbar?: React.ReactNode;
 };
 
 export default function Presentation({
   content,
-  theme,
+  config,
   // FIXME: toolbar feels weird, maybe context can fix it
   toolbar,
 }: PresentationProps): React.ReactElement {
-  // default ref has to be declared unconditionally
   const container = useRef<HTMLDivElement>();
   const [presentation, setPresentation] = useState(null);
 
@@ -52,9 +36,30 @@ export default function Presentation({
 
   return (
     <>
-      <Container ref={container} className={theme}>
+      <div
+        ref={container}
+        className={config?.theme}
+        css={{
+          overflowX: 'scroll',
+          scrollSnapType: 'x mandatory',
+          display: 'flex',
+          flex: 1,
+
+          section: {
+            padding: '1em',
+            fontSize: '2vw',
+            width: '100%',
+            flex: '1 0 auto',
+            scrollSnapAlign: 'start',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: config.align,
+            justifyContent: config.justify,
+          },
+        }}
+      >
         {presentation}
-      </Container>
+      </div>
       <Toolbar>
         <button onClick={handleFullscreen}>
           <span className="emoji">↗ </span>

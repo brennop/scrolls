@@ -20,7 +20,7 @@ function Slides(): React.ReactElement {
   const [markdown, setMarkdown] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const { content, data } = useFrontmatter(markdown);
+  const { content, config } = useFrontmatter(markdown);
 
   useEffect(() => {
     if (doc) {
@@ -42,10 +42,10 @@ function Slides(): React.ReactElement {
 
   return loading === false ? (
     <EditLayout>
-      <ThemeLoader theme={data?.theme} />
+      <ThemeLoader theme={config.theme} />
       <CodeEditor initialValue={value} roomName={doc} commit={commit} onChange={setMarkdown} />
       <Presentation
-        theme={data?.theme}
+        config={config}
         content={content}
         toolbar={<Publish data={markdown} name={doc} />}
       />

@@ -23,12 +23,12 @@ export default function View(): React.ReactElement {
     }
   }, [doc]);
 
-  const { content, data } = useFrontmatter(markdown);
+  const { content, config } = useFrontmatter(markdown);
 
   return (
     <EditLayout>
-      <ThemeLoader theme={data?.theme} />
-      <Presentation theme={data?.theme} content={content} />
+      <ThemeLoader theme={config.theme} />
+      <Presentation config={config} content={content} />
     </EditLayout>
   );
 }
