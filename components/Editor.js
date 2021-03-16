@@ -20,15 +20,16 @@ const Container = styled.div`
   padding: 1em;
 
   .CodeMirror * {
-    font-family: "Roboto Mono", monospace;
+    font-family: 'Roboto Mono', monospace;
   }
 
   .CodeMirror {
     height: 100%;
-    width: 100%
+    width: 100%;
   }
-}
 `;
+
+const signalingServer = process.env.NEXT_PUBLIC_WEBRTC_SIGNLING;
 
 const CodeEditor = ({ roomName, initialValue, commit, onChange }) => {
   const textarea = useRef(null);
@@ -45,7 +46,7 @@ const CodeEditor = ({ roomName, initialValue, commit, onChange }) => {
     if (textarea.current && !binding) {
       const ydoc = new Y.Doc();
       const provider = new WebrtcProvider(roomName, ydoc, {
-        signaling: ['ws://192.168.1.76:4444'],
+        signaling: [signalingServer],
       });
       const yText = ydoc.getText('codemirror');
       const yUndoManager = new Y.UndoManager(yText);
