@@ -89,6 +89,10 @@ blockquote {
   border-left: 0.5em #eee solid;
 }
 
+blockquote p {
+  margin: 0;
+}
+
 pre {
   background: #eee;
   padding: 1em;
