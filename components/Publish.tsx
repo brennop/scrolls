@@ -5,8 +5,8 @@ import { publish } from 'services/firebase';
 export default function Publish({ data, name }) {
   const [show, setShow] = useState(false);
   const [path, setPath] = useState<string>(null);
-  const host = window.location.host;
-  const fullPath = `${host}/view/${path}`;
+  const origin = window.location.origin;
+  const fullPath = `${origin}/view/${path}`;
 
   const handlePublish = () => {
     publish(data, name)
@@ -49,7 +49,7 @@ export default function Publish({ data, name }) {
               Published to
             </h1>
             <a
-              href={fullPath}
+              href={`/view/${path}`}
               target="_blank"
               rel="noreferrer noopener"
               css={{
