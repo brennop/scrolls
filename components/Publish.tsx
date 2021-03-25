@@ -31,7 +31,6 @@ export default function Publish({ data, name }) {
             css={{
               background: '#212121',
               borderRadius: '8px',
-              width: '320px',
               padding: '32px',
               display: 'flex',
               flexDirection: 'column',
