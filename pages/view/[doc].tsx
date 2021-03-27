@@ -9,6 +9,7 @@ import { EditLayout } from 'styles';
 export default function View(): React.ReactElement {
   const router = useRouter();
   const doc = router.query.doc as string;
+  const print = router.query.print != null;
   const [markdown, setMarkdown] = useState('');
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function View(): React.ReactElement {
   return (
     <EditLayout>
       <ThemeLoader theme={config.theme} />
-      <Presentation config={config} content={content} />
+      <Presentation config={config} content={content} print={print} />
     </EditLayout>
   );
 }

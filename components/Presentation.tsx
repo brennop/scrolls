@@ -8,6 +8,7 @@ type PresentationProps = {
   content: string;
   config: Config;
   toolbar?: React.ReactNode;
+  print?: boolean;
 };
 
 export default function Presentation({
@@ -15,6 +16,7 @@ export default function Presentation({
   config,
   // FIXME: toolbar feels weird, maybe context can fix it
   toolbar,
+  print,
 }: PresentationProps): React.ReactElement {
   const container = useRef<HTMLDivElement>();
   const [presentation, setPresentation] = useState(null);
@@ -39,24 +41,31 @@ export default function Presentation({
       <div
         ref={container}
         className={config?.theme}
-        css={{
-          overflowX: 'scroll',
-          scrollSnapType: 'x mandatory',
-          display: 'flex',
-          flex: 1,
+        css={`
+          ${
+            print
+              ? ''
+              : `
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        display: flex;
+        flex: 1;
+            `
+          }
 
-          section: {
-            padding: '1em',
-            fontSize: '2vw',
-            width: '100%',
-            flex: '1 0 auto',
-            scrollSnapAlign: 'start',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: config.align,
-            justifyContent: config.justify,
+          & > section {
+            padding: 1em;
+            font-size: 2vw;
+            width: ${print ? '1280px' : '100%'};
+            height: ${print ? '720px' : '100%'};
+            flex: 1 0 auto;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            align-items: ${config.align};
+            justify-content: ${config.justify};
           },
-        }}
+        `}
       >
         {presentation}
       </div>

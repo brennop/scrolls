@@ -118,3 +118,32 @@ body {
   --color-brown: brown;
   --color-gray: gray;
 }
+
+@page {
+  size: 1280px 720px;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body {
+    margin: 0;
+    page-break-inside: avoid;
+  }
+
+  section {
+    page-break-before: always;
+  }
+
+  section,
+  section * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  svg {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+  }
+}
