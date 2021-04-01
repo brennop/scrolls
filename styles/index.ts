@@ -21,6 +21,10 @@ export const GlobalStyle = createGlobalStyle`
     transform: translate(0, 0.2em);
   }
 
+  code {
+    font-family: Roboto Mono, monospace;
+  }
+
   html {
     overflow: hidden;
   }

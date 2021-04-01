@@ -117,6 +117,7 @@ body {
   --color-lightpink: lightpink;
   --color-brown: brown;
   --color-gray: gray;
+  --color-code: #eee;
 }
 
 @page {
@@ -146,4 +147,73 @@ body {
     height: 100vh;
     width: 100vw;
   }
+}
+
+/* Comment */
+.hljs-comment,
+.hljs-quote {
+  color: #8e908c;
+}
+
+/* Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+  color: var(--color-red);
+}
+
+/* Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+  color: var(--color-orange);
+}
+
+/* Yellow */
+.hljs-attribute {
+  color: var(--color-yellow);
+}
+
+/* Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+  color: var(--color-green);
+}
+
+/* Blue */
+.hljs-title,
+.hljs-section {
+  color: var(--color-blue);
+}
+
+/* Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+  color: var(--color-purple);
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: var(--color-code);
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
 }
