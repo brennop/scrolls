@@ -16,7 +16,7 @@ const processor = unified()
   .use(emoji)
   .use(embedder, { transformers })
   .use(sectionize)
-  .use(highlight, { include: ['js', 'ts', 'jsx'] })
+  .use(highlight, { include: ['js', 'ts', 'jsx', 'md', 'bash', 'diff', 'css', 'sh'] })
   .use(md2react, {
     sanitize: false,
     // eslint-disable-next-line react/display-name
