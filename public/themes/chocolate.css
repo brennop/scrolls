@@ -26,7 +26,6 @@
   text-align: left;
   width: min-content;
   min-width: 50%;
-  margin: auto;
 }
 
 .chocolate :not(pre) > code {
