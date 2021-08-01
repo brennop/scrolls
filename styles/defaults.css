@@ -1,0 +1,219 @@
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.style-none {
+  list-style: none;
+}
+
+.size-150 {
+  font-size: 1.5em;
+}
+
+.size-200 {
+  font-size: 2em;
+}
+
+.size-250 {
+  font-size: 2.5em;
+}
+
+.size-300 {
+  font-size: 3em;
+}
+
+.height-100 {
+  height: 100%;
+}
+
+.height-80 {
+  height: 80%;
+}
+
+.red {
+  color: var(--color-red);
+}
+
+.green {
+  color: var(--color-green);
+}
+
+.blue {
+  color: var(--color-blue);
+}
+
+.yellow {
+  color: var(--color-yellow);
+}
+
+.orange {
+  color: var(--color-orange);
+}
+
+.purple {
+  color: var(--color-purple);
+}
+
+.aqua {
+  color: var(--color-aqua);
+}
+
+.pink {
+  color: var(--color-pink);
+}
+
+.lightpink {
+  color: var(--color-lightpink);
+}
+
+.brown {
+  color: var(--color-brown);
+}
+
+.gray {
+  color: var(--color-gray);
+}
+
+blockquote {
+  color: #666666;
+  margin: 1em 0;
+  padding-left: 1em;
+  border-left: 0.5em #eee solid;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+pre {
+  background: #eee;
+  padding: 1em;
+  border-radius: 0.5em;
+  text-align: left;
+}
+
+.default {
+  background: #fff;
+  color: #212121;
+}
+
+body {
+  --color-red: red;
+  --color-green: green;
+  --color-blue: blue;
+  --color-yellow: yellow;
+  --color-orange: orange;
+  --color-purple: purple;
+  --color-aqua: aqua;
+  --color-pink: pink;
+  --color-lightpink: lightpink;
+  --color-brown: brown;
+  --color-gray: gray;
+  --color-code: #eee;
+}
+
+@page {
+  size: 1280px 720px;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body {
+    margin: 0;
+    page-break-inside: avoid;
+  }
+
+  section {
+    page-break-before: always;
+  }
+
+  section,
+  section * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  svg {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+/* Comment */
+.hljs-comment,
+.hljs-quote {
+  color: #8e908c;
+}
+
+/* Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+  color: var(--color-red);
+}
+
+/* Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+  color: var(--color-orange);
+}
+
+/* Yellow */
+.hljs-attribute {
+  color: var(--color-yellow);
+}
+
+/* Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+  color: var(--color-green);
+}
+
+/* Blue */
+.hljs-title,
+.hljs-section {
+  color: var(--color-blue);
+}
+
+/* Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+  color: var(--color-purple);
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: var(--color-code);
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}

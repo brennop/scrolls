@@ -9,6 +9,7 @@
   --color-aqua: #8abeb7;
   --color-blue: #81a2be;
   --color-purple: #b294bb;
+  --color-code: #282a2e;
 }
 
 .tomorrow blockquote {
@@ -20,17 +21,16 @@
 }
 
 .tomorrow pre {
-  background: #282a2e;
+  background: var(--color-code);
   padding: 1em;
   border-radius: 0.5em;
   text-align: left;
   width: min-content;
   min-width: 50%;
-  margin: auto;
 }
 
 .tomorrow :not(pre) > code {
-  background: #282a2e;
+  background: var(--color-code);
   color: var(--color-red);
   padding: 0.3em 0.5em;
   border-radius: 0.5em;
