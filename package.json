@@ -15,7 +15,7 @@
     "highlight.js": "^10.7.1",
     "next": "^10.0.8",
     "object-hash": "^2.1.1",
-    "prismjs": "^1.21.0",
+    "prismjs": "^1.24.0",
     "react": "^17.0.1",
     "react-aria-modal": "^4.0.0",
     "react-dom": "^17.0.1",
