@@ -28,7 +28,7 @@ const alignMap = {
 const parseConfig = (data: { [key: string]: string }): Config => {
   const theme = themes.includes(data?.theme) ? data.theme : 'default';
   const align = alignMap[data?.align] || 'center';
-  const justify = data?.justify || 'flex-start';
+  const justify = data?.justify || 'center';
   return { theme, align, justify };
 };
 
