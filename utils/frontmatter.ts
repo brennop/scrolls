@@ -16,7 +16,7 @@ interface Doc {
 const defaultConfig: Config = {
   theme: 'default',
   align: 'center',
-  justify: 'flex-start',
+  justify: 'center',
 };
 
 const alignMap = {
