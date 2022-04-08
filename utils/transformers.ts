@@ -45,6 +45,18 @@ const CodeSandboxTransformer: Transformer = {
   },
 };
 
+const DefaultTransformer: Transformer = {
+  name: 'Default',
+  shouldTransform(url) {
+    const { host } = new URL(url);
+
+    return ['play.tailwindcss.com'].includes(host);
+  },
+  getHTML(url) {
+    return `<iframe src="${url}" style="width:100%; height:100%; border:0; border-radius: 4px; overflow:hidden;" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>`;
+  },
+};
+
 export const getTimeValueInSeconds = (timeValue: string) => {
   if (Number(timeValue).toString() === timeValue) {
     return timeValue;
@@ -98,4 +110,4 @@ const YouTubeTransformer: Transformer = {
   },
 };
 
-export default [CodeSandboxTransformer, YouTubeTransformer];
+export default [CodeSandboxTransformer, YouTubeTransformer, DefaultTransformer];
