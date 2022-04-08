@@ -9,7 +9,7 @@ type PresentationProps = {
   config: Config;
   toolbar?: React.ReactNode;
   print?: boolean;
-  line: number;
+  line?: number;
 };
 
 export default function Presentation({
@@ -39,6 +39,7 @@ export default function Presentation({
   };
 
   useEffect(() => {
+    if (line == null) return;
     // use current cursor line on editor to find slide
     // TODO: improve readability this feels like a hack
     const groups = `${content}\n`
