@@ -45,6 +45,7 @@ function Slides(): React.ReactElement {
       />
       <Presentation
         line={line}
+        raw={markdown}
         config={config}
         content={content}
         toolbar={<Publish data={markdown} name={doc} />}

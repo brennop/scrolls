@@ -9,7 +9,9 @@ type PresentationProps = {
   config: Config;
   toolbar?: React.ReactNode;
   print?: boolean;
+
   line?: number;
+  raw?: string;
 };
 
 export default function Presentation({
@@ -19,6 +21,7 @@ export default function Presentation({
   toolbar,
   print,
   line,
+  raw,
 }: PresentationProps): React.ReactElement {
   const container = useRef<HTMLDivElement>();
   const [presentation, setPresentation] = useState(null);
@@ -42,25 +45,22 @@ export default function Presentation({
     if (line == null) return;
     // use current cursor line on editor to find slide
     // TODO: improve readability this feels like a hack
-    const groups = `${content}\n`
-      .split(/^# /m)
-      .slice(1)
-      .reduce(
-        (arr, group, index) => [
-          ...arr,
-          ...group
-            .split('\n')
-            .slice(1)
-            .map(() => index),
-        ],
-        []
-      );
-    const current = groups[line] || 0;
+    const groups = `${raw}\n`.split(/^# /m).reduce(
+      (arr, group, index) => [
+        ...arr,
+        ...group
+          .split('\n')
+          .slice(1)
+          .map(() => index),
+      ],
+      []
+    );
+    const current = groups[line] - 1;
     container.current.scrollTo({
-      left: container.current.clientWidth * current,
+      left: container.current.clientWidth * current || 0,
       behavior: 'smooth',
     });
-  }, [line, content]);
+  }, [line, raw]);
 
   return (
     <>
