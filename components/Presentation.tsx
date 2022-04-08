@@ -9,6 +9,7 @@ type PresentationProps = {
   config: Config;
   toolbar?: React.ReactNode;
   print?: boolean;
+  line: number;
 };
 
 export default function Presentation({
@@ -17,6 +18,7 @@ export default function Presentation({
   // FIXME: toolbar feels weird, maybe context can fix it
   toolbar,
   print,
+  line,
 }: PresentationProps): React.ReactElement {
   const container = useRef<HTMLDivElement>();
   const [presentation, setPresentation] = useState(null);
@@ -35,6 +37,29 @@ export default function Presentation({
   const handleFullscreen = () => {
     container.current.requestFullscreen();
   };
+
+  useEffect(() => {
+    // use current cursor line on editor to find slide
+    // TODO: improve readability this feels like a hack
+    const groups = `${content}\n`
+      .split(/^# /m)
+      .slice(1)
+      .reduce(
+        (arr, group, index) => [
+          ...arr,
+          ...group
+            .split('\n')
+            .slice(1)
+            .map(() => index),
+        ],
+        []
+      );
+    const current = groups[line] || 0;
+    container.current.scrollTo({
+      left: container.current.clientWidth * current,
+      behavior: 'smooth',
+    });
+  }, [line, content]);
 
   return (
     <>

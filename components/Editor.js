@@ -31,7 +31,13 @@ const Container = styled.div`
 
 const signalingServer = process.env.NEXT_PUBLIC_WEBRTC_SIGNLING;
 
-const CodeEditor = ({ roomName, initialValue, commit, onChange }) => {
+const CodeEditor = ({
+  roomName,
+  initialValue,
+  commit,
+  onChange,
+  onLineChange,
+}) => {
   const textarea = useRef(null);
   const [binding, setBinding] = useState();
   const [editor, setEditor] = useState();
@@ -81,8 +87,13 @@ const CodeEditor = ({ roomName, initialValue, commit, onChange }) => {
 
       setBinding(binding);
       setEditor(editor);
+
+      editor.on('cursorActivity', (event) => {
+        const cursor = event.getCursor();
+        onLineChange(cursor.line);
+      });
     }
-  }, [binding, commit, roomName, initialValue, onChange]);
+  }, [binding, commit, roomName, initialValue, onChange, onLineChange]);
 
   return (
     <Container ref={container}>

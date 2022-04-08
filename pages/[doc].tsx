@@ -19,6 +19,7 @@ function Slides(): React.ReactElement {
   const [value, setValue] = useState<Uint8Array>(null);
   const [loading, setLoading] = useState(true);
   const [markdown, setMarkdown] = useState('');
+  const [line, setLine] = useState(0);
 
   const { content, config } = useFrontmatter(markdown);
 
@@ -35,8 +36,15 @@ function Slides(): React.ReactElement {
   return loading === false ? (
     <EditLayout>
       <ThemeLoader theme={config.theme} />
-      <Editor initialValue={value} roomName={doc} commit={commit} onChange={setMarkdown} />
+      <Editor
+        initialValue={value}
+        roomName={doc}
+        commit={commit}
+        onChange={setMarkdown}
+        onLineChange={setLine}
+      />
       <Presentation
+        line={line}
         config={config}
         content={content}
         toolbar={<Publish data={markdown} name={doc} />}
