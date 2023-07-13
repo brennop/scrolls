@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import AriaModal from 'react-aria-modal';
-import { publish } from 'services/firebase';
 
 export default function Publish({ data, name }) {
   const [show, setShow] = useState(false);

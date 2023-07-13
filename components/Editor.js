@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CodeMirror from 'codemirror';
 import * as Y from 'yjs';
 import { CodemirrorBinding } from 'y-codemirror';
-import { WebrtcProvider } from 'y-webrtc';
+import { HocuspocusProvider } from "@hocuspocus/provider";
 import useResizeObserver from 'use-resize-observer';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/seti.css';
@@ -29,12 +29,9 @@ const Container = styled.div`
   }
 `;
 
-const signalingServer = process.env.NEXT_PUBLIC_WEBRTC_SIGNLING;
-
 const CodeEditor = ({
   roomName,
   initialValue,
-  commit,
   onChange,
   onLineChange,
 }) => {
@@ -51,8 +48,10 @@ const CodeEditor = ({
   useEffect(() => {
     if (textarea.current && !binding) {
       const ydoc = new Y.Doc();
-      const provider = new WebrtcProvider(roomName, ydoc, {
-        signaling: [signalingServer],
+      const provider = new HocuspocusProvider({
+        url: "wss://scrolls-server.glitch.me",
+        name: roomName,
+        document: ydoc,
       });
       const yText = ydoc.getText('codemirror');
       const yUndoManager = new Y.UndoManager(yText);
@@ -73,10 +72,6 @@ const CodeEditor = ({
 
       onChange(yText.toJSON());
 
-      ydoc.on('update', () => {
-        commit(Y.encodeStateAsUpdate(ydoc));
-      });
-
       yText.observe(() => {
         onChange(yText.toJSON());
       });
@@ -93,7 +88,7 @@ const CodeEditor = ({
         onLineChange(cursor.line);
       });
     }
-  }, [binding, commit, roomName, initialValue, onChange, onLineChange]);
+  }, [binding, roomName, initialValue, onChange, onLineChange]);
 
   return (
     <Container ref={container}>
